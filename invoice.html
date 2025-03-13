@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Emergent Medicare Invoice</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            width: 900px;
+            margin: 0 auto;
+            border: 1px solid black;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header p {
+            margin: 5px 0;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .info div {
+            width: 30%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .footer {
+            margin-top: 20px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .footer .signature {
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        #download-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-control {
+            border: none;
+            outline: none; 
+            width: 100%; 
+            height: 100%;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            padding: 0; /* Reset padding to avoid extra space */
+            margin: 0; /* Reset margin to avoid extra space */
+            font-size: inherit; /* Inherit font size for consistency */
+        }
+        .srno{
+            border: none;
+            outline: none; 
+            width: 3%;  
+            border: 1px solid black;          
+        }
+        .batch{
+            border: none;
+            outline: none; 
+            width: 6%;  
+            border: 1px solid black;          
+        }
+        .name{
+            border: none;
+            outline: none; 
+            width: 10%;  
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="invoice-container">
+        <div class="header">
+            <h1>EMERGENT MEDICARE</h1>
+            <p>BOOTH NO. 22, SECTOR 19, PANCHKULA</p>
+            <p>(M): 8284896088</p>
+            <p>[GSTIN] - 06BUXPA9568F1Z1 &nbsp; &nbsp; [D.L.No] - 1091-B</p>
+        </div>
+        <div class="info">
+            <div>
+                <label>Name</label><br>
+                <input type="text" id="name" style="width: 100%; height: 90%;">
+            </div>
+            <div>
+                <label>Prescribed By</label><br>
+                <input type="text" id="prescribedBy" style="width: 100%; height: 90%;">
+            </div>
+            <div>
+                <label>Address</label><br>
+                <input type="text" id="address" style="width: 100%; height: 90%;">
+            </div>
+            <div>
+                <label>Date:</label><br>
+                <input type="text" id="date" style="width: 98%; height: 90%;">
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>SR. No.</th>
+                    <th>NAME OF MEDICINES</th>
+                    <th>Qty.</th>
+                    <th>Mfg. By</th>
+                    <th>Batch No.</th>
+                    <th>Exp Date</th>
+                    <th>AMOUNT</th>
+                </tr>
+            </thead>
+            <tbody id="medicine-rows">
+                <tr>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="srno"><input type="text" class="form-control"></td>
+                    <td class="name"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                    <td class="batch"><input type="text" class="form-control"></td>
+                </tr>
+                
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" style="text-align: right;">TOTAL</td>
+                    <td id="total"><input type="text" class="form-control"></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="footer">
+            <p>1. Dispensed under Supervision of Qualified Person</p>
+            <p>2. Certified that price changed in accordance with the latest catalogue of the pharmacy Concerned</p>
+            <p>3. All Disputes subjected to Panchkula Jurisdiction</p>
+            <div class="signature">
+                <p>Signature</p>
+            </div>
+            <p style="text-align: center; font-weight: bold;">WISH YOU A SPEEDY RECOVERY</p>
+        </div>
+    </div>
+    <div id="download-buttons">
+        <button id="download-image">Download as Image</button>
+        <button id="download-pdf">Download as PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const invoiceContainer = document.getElementById('invoice-container');
+        const downloadImageButton = document.getElementById('download-image');
+        const downloadPdfButton = document.getElementById('download-pdf');
+        const medicineRows = document.getElementById('medicine-rows');
+
+        // Function to calculate and update the total amount
+        function calculateTotal() {
+            let total = 0;
+            const amountFields = document.querySelectorAll('.amount');
+            amountFields.forEach(field => {
+                const value = parseFloat(field.value);
+                if (!isNaN(value)) {
+                    total += value;
+                }
+            });
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+
+        // Add event listeners to amount fields for total calculation
+        medicineRows.addEventListener('input', function (event) {
+            if (event.target.classList.contains('amount')) {
+                calculateTotal();
+            }
+        });
+
+        downloadImageButton.addEventListener('click', () => {
+            html2canvas(invoiceContainer).then(canvas => {
+                const image = canvas.toDataURL("image/png");
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = "invoice.png";
+                link.click();
+            });
+        });
+
+        downloadPdfButton.addEventListener('click', () => {
+            html2canvas(invoiceContainer).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+                const imgWidth = pdf.internal.pageSize.getWidth();
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                pdf.save('invoice.pdf');
+            });
+        });
+    </script>
+</body>
+
+</html>
