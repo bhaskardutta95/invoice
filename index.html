@@ -5,6 +5,8 @@
     <title>Emergent Medicare Invoice</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="table-create.js"></script>
+
     <style>
         body {
             font-family: sans-serif;
@@ -75,33 +77,66 @@
 
         .form-control {
             border: none;
-            outline: none; 
-            width: 100%; 
+            outline: none;
+            width: 100%;
             height: 100%;
-            box-sizing: border-box; 
-            padding: 0; 
-            margin: 0; 
-            font-size: inherit; 
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-size: inherit;
         }
-        .srno{
+
+        .srno {
             border: none;
-            outline: none; 
-            width: 3%;  
-            border: 1px solid black;          
+            outline: none;
+            width: 3%;
+            border: 1px solid black;
         }
-        .batch{
+
+        .batch {
             border: none;
-            outline: none; 
-            width: 6%;  
-            border: 1px solid black;          
+            outline: none;
+            width: 6%;
+            border: 1px solid black;
         }
-        .name{
+
+        .name {
             border: none;
-            outline: none; 
-            width: 10%;  
+            outline: none;
+            width: 35%;
+            border: 1px solid black;
+        }
+
+        .qty {
+            border: none;
+            outline: none;
+            width: 6%;
+            border: 1px solid black;
+        }
+
+        .mfg {
+            border: none;
+            outline: none;
+            width: 10%;
+            border: 1px solid black;
+        }
+
+        .exp {
+            border: none;
+            outline: none;
+            width: 6%;
+            border: 1px solid black;
+        }
+
+        .amount {
+            border: none;
+            outline: none;
+            width: 10%;
             border: 1px solid black;
         }
     </style>
+
+
 </head>
 
 <body>
@@ -112,7 +147,7 @@
             <p>(M): 8284896088</p>
             <p>[GSTIN] - 06BUXPA9568F1Z1 &nbsp; &nbsp; [D.L.No] - 1091-B</p>
         </div>
-        <div  class="info">
+        <div class="info">
             <div>
                 <input type="text" id="name" style="width: 80%; height: 100%; border: none;">
             </div>
@@ -135,74 +170,11 @@
                 <input type="text" id="date" style="width: 97%; height: 90%;">
             </div>
         </div>
+        <div id="table-container">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>SR. No.</th>
-                    <th>NAME OF MEDICINES</th>
-                    <th>Qty.</th>
-                    <th>Mfg. By</th>
-                    <th>Batch No.</th>
-                    <th>Exp Date</th>
-                    <th>AMOUNT</th>
-                </tr>
-            </thead>
-            <tbody id="medicine-rows">
-                <tr>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                </tr>
-                <tr>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                </tr>
-                <tr>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                </tr>
-                <tr>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                </tr>
-                <tr>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="srno"><input type="text" class="form-control"></td>
-                    <td class="name"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                    <td class="batch"><input type="text" class="form-control"></td>
-                </tr>
-                
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="6" style="text-align: right;">TOTAL</td>
-                    <td id="total"><input type="text" class="form-control"></td>
-                </tr>
-            </tfoot>
-        </table>
+        </div>
+
+
         <div class="footer">
             <p>1. Dispensed under Supervision of Qualified Person</p>
             <p>2. Certified that price changed in accordance with the latest catalogue of the pharmacy Concerned</p>
@@ -225,26 +197,6 @@
         const downloadImageButton = document.getElementById('download-image');
         const downloadPdfButton = document.getElementById('download-pdf');
         const medicineRows = document.getElementById('medicine-rows');
-
-        // Function to calculate and update the total amount
-        function calculateTotal() {
-            let total = 0;
-            const amountFields = document.querySelectorAll('.amount');
-            amountFields.forEach(field => {
-                const value = parseFloat(field.value);
-                if (!isNaN(value)) {
-                    total += value;
-                }
-            });
-            document.getElementById('total').textContent = total.toFixed(2);
-        }
-
-        // Add event listeners to amount fields for total calculation
-        medicineRows.addEventListener('input', function (event) {
-            if (event.target.classList.contains('amount')) {
-                calculateTotal();
-            }
-        });
 
         downloadImageButton.addEventListener('click', () => {
             html2canvas(invoiceContainer).then(canvas => {
